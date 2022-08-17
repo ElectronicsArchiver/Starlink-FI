@@ -1,0 +1,6 @@
+## Known issues and limitations
+* The modchip was designed before SpaceX introduced a firmware update that blew a fuse to disable all UART output. The modchip was initially designed to trigger on UART output, but can be adapted to trigger on the eMMC D0 signal. On a newer revision it would be useful to have the ability to read UART output as well as trigger on eMMC D0 data. UART can be re-enabled in BL2 and can provide an easy way of verifying that the glitch succeeded.
+* The modchip was designed for the circular user terminal, the same attack should work on the square user terminal but will require you to create a new PCB design.
+* One section of castellated holes is in the wrong location. Be careful when using the design as is and follow the mounting instruction accordingly.
+* Unplugging the modchip from the control PC after the glitch succeeded may result in the dish rebooting. This is likely because of a missing pull-down resistor on the `IN A` pin of the MCP1405 MOSFET driver.
+* The provided firmware expects an external control PC to orchestrate the fault injection attempts. It should be fairly straightforward to turn this into a stand-alone modchip using the (currently unused) second RP2040 Cortex-M0 core.
